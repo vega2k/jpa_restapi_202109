@@ -18,7 +18,7 @@ public class MemberRepository {
 //        this.em = em;
 //    }
 
-    private void save(Member member) {
+    public void save(Member member) {
         em.persist(member);
     }
 
