@@ -1,5 +1,6 @@
 package jpastudy.jpashop.domain;
 
+import jpastudy.jpashop.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
 
