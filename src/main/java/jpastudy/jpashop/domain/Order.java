@@ -17,6 +17,8 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
 
 }
