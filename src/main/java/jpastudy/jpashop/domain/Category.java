@@ -29,4 +29,11 @@ public class Category {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="parent_id")
     private Category parent;
+
+    //--연관관계 메서드
+    public void addChildCategory(Category child){
+        this.children.add(child);
+        child.setParent(this);
+    }
+
 }
