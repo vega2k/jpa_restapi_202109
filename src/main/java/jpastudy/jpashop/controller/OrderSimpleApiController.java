@@ -36,6 +36,7 @@ public class OrderSimpleApiController {
     /**
      * V2. 엔티티를 조회해서 DTO로 변환
      * - 단점: 지연로딩으로 쿼리 N번 호출
+     * - Order 2건이므로 Member 2, Delivery 2 1 + 2 + 2 = 5번 
      */
     @GetMapping("/api/v2/simple-orders")
     public List<SimpleOrderDto> ordersV2() {
@@ -45,6 +46,20 @@ public class OrderSimpleApiController {
                 .collect(Collectors.toList());  //List<SimpleOrderDto>
         return result;
     }
+
+    /**
+     * V3. 엔티티를 조회해서 DTO로 변환(fetch join 사용함)
+     * fetch join으로 쿼리 1번 호출
+     */
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> ordersV3() {
+        List<Order> orders = orderRepository.findAllWithMemberDelivery();
+        List<SimpleOrderDto> result = orders.stream()
+                .map(o -> new SimpleOrderDto(o))
+                .collect(Collectors.toList());
+        return result;
+    }
+    
 
     @Data
     static class SimpleOrderDto {
