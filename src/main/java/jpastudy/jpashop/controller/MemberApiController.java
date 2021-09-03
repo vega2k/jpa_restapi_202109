@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 public class MemberApiController {
     private final MemberService memberService;
 
-    @PostMapping("/api/v1/member")
+    @PostMapping("/api/v1/members")
     public Long saveMember(@RequestBody @Valid Member member) {
         Long memberId = memberService.join(member);
         return memberId;
