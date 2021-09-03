@@ -117,7 +117,19 @@ public class OrderRepository {
         return QOrder.order.status.eq(orderStatus);
     }
 
-    
+    /*
+    * fetch join
+    * Order -> Member
+    * Order -> Delivery
+    */
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
+                .getResultList();
+    }
+
 
 
 }
