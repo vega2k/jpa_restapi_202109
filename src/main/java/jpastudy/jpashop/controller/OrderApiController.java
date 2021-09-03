@@ -44,6 +44,11 @@ public class OrderApiController {
     /*
      * V2. DTO 를 만들어서 노출 
      * OrderDto, OrderItemDto 클래스 선언
+     * • SQL 실행 수
+     * order 1번
+     * member , address N번(order 조회 수 만큼)
+     * orderItem N번(order 조회 수 만큼)
+     * item N번(orderItem 조회 수 만큼)
      */
     @GetMapping("/api/v2/orders")
     public List<OrderDto> ordersV2() {
