@@ -5,9 +5,12 @@ import jpastudy.jpashop.domain.item.Item;
 import jpastudy.jpashop.repository.ItemRepository;
 import jpastudy.jpashop.repository.MemberRepository;
 import jpastudy.jpashop.repository.OrderRepository;
+import jpastudy.jpashop.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -37,5 +40,17 @@ public class OrderService {
         return order.getId();
     }
 
+    /** 주문 취소 */
+    @Transactional
+    public void cancelOrder(Long orderId) {
+        //주문 엔티티 조회
+        Order order = orderRepository.findOne(orderId);
+        //주문 취소 (stockQuantity 수량 증가)
+        order.cancel();
+    }
 
+    /** 주문 검색 */
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAll(orderSearch);
+    }
 }
