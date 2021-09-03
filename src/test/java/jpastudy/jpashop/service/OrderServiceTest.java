@@ -8,6 +8,7 @@ import jpastudy.jpashop.domain.item.Book;
 import jpastudy.jpashop.domain.item.Item;
 import jpastudy.jpashop.exception.NotEnoughStockException;
 import jpastudy.jpashop.repository.OrderRepository;
+import jpastudy.jpashop.repository.OrderSearch;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import java.util.List;
 
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
@@ -97,4 +100,13 @@ class OrderServiceTest {
                 item.getStockQuantity());
     }
 
+    @Test
+    public void 주문조회() {
+        OrderSearch search = new OrderSearch();
+        search.setMemberName("부트");
+
+        List<Order> orders = orderService.findOrders(search);
+        assertEquals("리스트건수 체크",1, orders.size());
+
+    }
 }
