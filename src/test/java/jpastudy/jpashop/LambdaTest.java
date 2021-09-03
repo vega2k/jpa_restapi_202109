@@ -9,6 +9,8 @@ public class LambdaTest {
     @Test
     public void iterable() {
         List<User> users = List.of(new User("스프링"), new User("테스트"));
+        //Consumer 의 void accept(T t) 메서드 재정의
+        users.forEach(user -> System.out.println(user));
     }
 
     @Test @Disabled
