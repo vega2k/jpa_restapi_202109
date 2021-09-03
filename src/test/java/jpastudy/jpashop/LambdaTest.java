@@ -7,6 +7,11 @@ import java.util.List;
 
 public class LambdaTest {
     @Test
+    public void stream() {
+        List.of(new User("a",10),new User("b",6), new User("c",15));
+    }
+
+    @Test
     public void iterable() {
         List<User> users = List.of(new User("스프링"), new User("테스트"));
         //Consumer 의 void accept(T t) 메서드 재정의 - 람다식
