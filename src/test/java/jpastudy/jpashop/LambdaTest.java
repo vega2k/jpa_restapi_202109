@@ -17,7 +17,11 @@ public class LambdaTest {
                 .map(User::getName)
                 .collect(toList());//Stream<String>  -> List<String>
         userList.forEach(name -> System.out.println(name));
-        //age가 10보다 큰 user 이름만 List<String> 형태로 가져오기
+        //age가 10보다 큰 user 이름만 출력하기
+        users.stream()  //Stream<User>
+                .filter(user -> user.getAge() >= 10)  //Stream<User>
+                .map(user -> user.getName())
+                .forEach(System.out::println);
 
     }
 
