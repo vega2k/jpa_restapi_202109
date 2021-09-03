@@ -6,7 +6,9 @@ import jpastudy.jpashop.domain.Order;
 import jpastudy.jpashop.domain.OrderStatus;
 import jpastudy.jpashop.domain.item.Book;
 import jpastudy.jpashop.domain.item.Item;
+import jpastudy.jpashop.exception.NotEnoughStockException;
 import jpastudy.jpashop.repository.OrderRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -61,6 +63,21 @@ class OrderServiceTest {
         assertEquals("주문 가격은 가격 * 수량이다.", 10000 * 2,
                 getOrder.getTotalPrice());
         assertEquals("주문 수량만큼 재고가 줄어야 한다.",8, item.getStockQuantity());
+    }
+
+    @Test
+    public void 상품주문_재고수량초과() throws Exception {
+        //Given
+        Member member = createMember("회원1", new Address("서울", "성내로", "80"));
+        Item item = createBook("스프링 부트", 10000, 10); //이름, 가격, 재고
+        int orderCount = 11; //재고보다 많은 수량
+        NotEnoughStockException exception =
+                Assertions.assertThrows(NotEnoughStockException.class, () -> {
+        //When
+                    orderService.order(member.getId(), item.getId(), orderCount);
+                });
+        //Then
+        Assertions.assertEquals("need more stock.",exception.getMessage());
     }
 
 }
