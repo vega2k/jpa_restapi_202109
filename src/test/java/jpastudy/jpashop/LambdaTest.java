@@ -5,10 +5,19 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class LambdaTest {
     @Test
     public void stream() {
-        List.of(new User("a",10),new User("b",6), new User("c",15));
+        List<User> users = List.of(new User("a", 10), new User("b", 6), new User("c", 15));
+        //User의 이름 목록만 List<String> 형태로 가져오기
+        users.stream() //Stream<User>
+            .map(user -> user.getName())//Stream<User>  -> Stream<String>
+            .collect(toList());  //Stream<String>  -> List<String>
+
+
+        //age가 10보다 큰 user 이름만 List<String> 형태로 가져오기
     }
 
     @Test
