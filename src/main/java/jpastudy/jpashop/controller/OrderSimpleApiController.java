@@ -64,7 +64,7 @@ public class OrderSimpleApiController {
     }
 
     /**
-     * V4. JPA에서 DTO로 바로 조회
+     * V4. JPA에서 쿼리 결과는 DTO에 저장
      * - 쿼리 1번 호출
      * - select 절에서 원하는 데이터만 선택해서 조회
      */
