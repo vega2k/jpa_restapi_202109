@@ -41,6 +41,19 @@ public class OrderApiController {
         }
         return all;
     }
+    /*
+     * V2. DTO 를 만들어서 노출 
+     * OrderDto, OrderItemDto 클래스 선언
+     */
+    @GetMapping("/api/v2/orders")
+    public List<OrderDto> ordersV2() {
+        List<Order> orders = orderRepository.findAllByQuerydsl(new OrderSearch());
+        List<OrderDto> result = orders.stream()
+                .map(o -> new OrderDto(o))
+                .collect(Collectors.toList());
+        return result;
+    }
+
 
     @Data
     static class OrderDto {
