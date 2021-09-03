@@ -12,9 +12,10 @@ public class LambdaTest {
     public void stream() {
         List<User> users = List.of(new User("a", 10), new User("b", 6), new User("c", 15));
         //User의 이름 목록만 List<String> 형태로 가져오기
-        users.stream() //Stream<User>
-            .map(user -> user.getName())//Stream<User>  -> Stream<String>
-            .collect(toList());  //Stream<String>  -> List<String>
+        List<String> userList = users.stream() //Stream<User>
+                .map(user -> user.getName())//Stream<User>  -> Stream<String>
+                .collect(toList());//Stream<String>  -> List<String>
+        userList.forEach(name -> System.out.println(name));
 
 
         //age가 10보다 큰 user 이름만 List<String> 형태로 가져오기
