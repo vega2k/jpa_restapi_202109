@@ -54,6 +54,8 @@ public class OrderQueryRepository {
         return orders;
     }
 
+    //version 5
+
     //OrderId 목록
     private List<Long> toOrderIds(List<OrderQueryDto> result) {
         return result.stream()

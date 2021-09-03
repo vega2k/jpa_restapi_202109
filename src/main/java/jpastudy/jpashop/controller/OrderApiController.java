@@ -6,6 +6,8 @@ import jpastudy.jpashop.domain.OrderItem;
 import jpastudy.jpashop.domain.OrderStatus;
 import jpastudy.jpashop.repository.OrderRepository;
 import jpastudy.jpashop.repository.OrderSearch;
+import jpastudy.jpashop.repository.order.query.OrderQueryDto;
+import jpastudy.jpashop.repository.order.query.OrderQueryRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderApiController {
     private final OrderRepository orderRepository;
-
+    private final OrderQueryRepository orderQueryRepository;
     /**
      * V1. 엔티티 직접 노출
      * 엔티티가 변하면 API 스펙이 변한다.
@@ -82,6 +84,11 @@ public class OrderApiController {
                 .map(o -> new OrderDto(o))  //Stream<Order> -> Stream<OrderDto>
                 .collect(Collectors.toList());  //Stream<OrderDto> -> List<OrderDto>
         return result;
+    }
+
+    @GetMapping("/api/v4/orders")
+    public List<OrderQueryDto> ordersV4() {
+        return orderQueryRepository.findOrderQueryDtos();
     }
 
     @Data
