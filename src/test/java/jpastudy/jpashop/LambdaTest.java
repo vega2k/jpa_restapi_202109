@@ -15,7 +15,8 @@ public class LambdaTest {
         t1.start();
 
         //Lambda Expression
-
+        Thread t2 = new Thread(() -> System.out.println("람다식"));
+        t2.start();
 
     }
 }
