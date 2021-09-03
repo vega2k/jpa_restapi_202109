@@ -32,7 +32,7 @@ public class OrderApiController {
             order.getMember().getName(); //Lazy 강제 초기화
             order.getDelivery().getAddress(); //Lazy 강제 초기화
             List<OrderItem> orderItems = order.getOrderItems();
-            orderItems.stream().forEach(o -> o.getItem().getName()); //Lazy 강제초기화
+            orderItems.forEach(o -> o.getItem().getName()); //Lazy 강제초기화
         }
         return all;
     }
