@@ -71,13 +71,13 @@ class OrderServiceTest {
         Member member = createMember("회원1", new Address("서울", "성내로", "80"));
         Item item = createBook("스프링 부트", 10000, 10); //이름, 가격, 재고
         int orderCount = 11; //재고보다 많은 수량
+        //When
         NotEnoughStockException exception =
                 Assertions.assertThrows(NotEnoughStockException.class, () -> {
-        //When
                     orderService.order(member.getId(), item.getId(), orderCount);
                 });
         //Then
-        Assertions.assertEquals("need more stock.",exception.getMessage());
+        Assertions.assertEquals("need more stock",exception.getMessage());
     }
 
 }
