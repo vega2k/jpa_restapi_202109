@@ -135,6 +135,9 @@ public class OrderRepository {
      * Order -> Member
      * Order -> Delivery
      * Order -> OrderItem -> Item
+     * //Fetch Join에서 페이징 처리를 메모리 상에서 하겠다는 warning 메시지
+     * 2021-09-03 17:26:03.423  WARN 1892 --- [nio-8087-exec-2] o.h.h.internal.ast.QueryTranslatorImpl   :
+     * HHH000104: firstResult/maxResults specified with collection fetch; applying in memory!
      */
     public List<Order> findAllWithItem() {
         return em.createQuery(
@@ -147,6 +150,22 @@ public class OrderRepository {
                 .setMaxResults(100)
                 .getResultList();
     }
+
+    /*
+     * fetch join 페이징처리
+     * Order -> Member
+     * Order -> Delivery
+     */
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
 
 
 }
