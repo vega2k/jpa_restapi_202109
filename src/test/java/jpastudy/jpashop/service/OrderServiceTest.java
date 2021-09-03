@@ -103,7 +103,8 @@ class OrderServiceTest {
     @Test
     public void 주문조회() {
         OrderSearch search = new OrderSearch();
-        search.setMemberName("부트");
+        search.setMemberName("userA");
+        search.setOrderStatus(OrderStatus.ORDER);
 
         List<Order> orders = orderService.findOrders(search);
         assertEquals("리스트건수 체크",1, orders.size());
